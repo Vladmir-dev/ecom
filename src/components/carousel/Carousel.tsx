@@ -27,19 +27,20 @@ const Carousel = () => {
 		 setCurrentSlide(newSlide)
 	}
 
-	useEffect(() => {
-       setInterval(() => {
-       	if (puased === false){
-       		let newSlide = currentSlide === CarouselData.length - 1 ? 0 : currentSlide + 1
-       		setCurrentSlide(newSlide)
-       	}
-       },10000)
-	},)
+	// useEffect(() => {
+ //       setInterval(() => {
+ //       	if (puased === false){
+ //       		let newSlide = currentSlide === CarouselData.length - 1 ? 0 : currentSlide + 1
+ //       		setCurrentSlide(newSlide)
+ //       	}
+ //       },10000)
+	// },)
 
 	return (
 
-		<div className="w-100vw h-[900px]">
-			<div className="min-w-full max-h-full ">
+		<div className="w-full">
+			<div className="w-full justify-center">
+
 				{CarouselData.map((slide, index) => {
 					return (
 						<>
@@ -50,22 +51,24 @@ const Carousel = () => {
 						key={index}
 						className ={
 							index === currentSlide
-							? "block w-full h-[950px] object-cover"
+							? "block min-w-full h-[870px] object-cover items-start"
 							:"hidden"
 						}
+						onMouseEnter={() => setPaused(true)}
+						onMouseLeave={() => setPaused(false)}
 						/>
-						<div className="flex justify-center">
-							<h1 className={index === currentSlide ? "absolute bottom-[200px] font-semibold flex justify-center md:text-[60px] truncate text-white font-roboto" : "hidden"}>{slide.title}</h1>
-							<p className={index === currentSlide ? "absolute bottom-[170px] text-[#f9f9f9] md:text-[16px]  uppercase font-roboto" : "hidden"} >{slide.sub}</p>
-							<button className="absolute bottom-[110px] bg-black text-white p-[10px] w-[145px] font-roboto uppercase">shop now</button>
+						<div className="flex justify-center flex flex-wrap ">
+							<div className={index === currentSlide ? "absolute bottom-[200px] font-semibold flex justify-center text-[30px] uppercase truncate text-white font-roboto break-all" : "hidden"}>{slide.title}</div>
+							<p className={index === currentSlide ? "absolute bottom-[170px] text-[#f9f9f9] text-[14px]  text-[12px] uppercase font-roboto" : "hidden"} >{slide.sub}</p>
+							<button className="absolute bottom-[110px] bg-black text-white p-[10px] w-[110px] text-[15px] font-roboto uppercase">shop now</button>
 						</div>
 						
 						</>
 						)
 				})}
 				
-				<AiOutlineLeft onClick ={()=> prevSlide()} className='absolute left-0 text-[25px] inset-y-1/2 text-black cursor-pointer rounded-lg bg-white bg-opacity-75 ml-[15px] w-[40px] h-[40px] p-[5px]' />
-				<AiOutlineRight onClick ={()=> nextSlide()} className='absolute right-0 text-[30px] inset-y-1/2 text-black cursor-pointer rounded-lg bg-white bg-opacity-75 mr-[15px] w-[40px] h-[40px] p-[5px]' />
+				<AiOutlineLeft onClick ={()=> prevSlide()} className='absolute left-0 text-[20px] inset-y-1/2 text-black cursor-pointer rounded-lg font-light bg-white bg-opacity-50 ml-[15px] w-[35px] h-[35px] p-[5px]' />
+				<AiOutlineRight onClick ={()=> nextSlide()} className='absolute right-0 text-[20px] inset-y-1/2 text-black cursor-pointer rounded-lg font-light bg-white bg-opacity-50 mr-[15px] w-[35px] h-[35px] p-[5px]' />
 			</div>
 		</div>
 	)
